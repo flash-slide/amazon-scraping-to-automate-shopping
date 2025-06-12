@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -43,6 +42,10 @@ const ScrapeLinkForm = () => {
     },
   });
 
+  // Watch the amazonProductLink field
+  const amazonLink = form.watch("amazonProductLink");
+  const isButtonDisabled = !amazonLink || isLoading;
+
   function onSubmit(values: z.infer<typeof TitleInputSchema>) {
     setIsLoading(true);
     const { amazonProductLink } = values;
@@ -70,7 +73,11 @@ const ScrapeLinkForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="mt-3 w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="mt-3 w-full"
+            disabled={isButtonDisabled}
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
