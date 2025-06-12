@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -17,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { TitleInputSchema } from "@/types/title-input-schema";
 import { z } from "zod";
 import { useAction } from "next-safe-action/hooks";
+import { scrapeData } from "@/server/actions/scrape-data";
 
 const ScrapeLinkForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,30 +29,24 @@ const ScrapeLinkForm = () => {
     },
   });
 
-  // const { execute, status, result } = useAction(register, {
-  //   onSuccess: ({ data }) => {
-  //     form.reset();
-  //     // if (data?.error) {
-  //     //   toast.error(data?.error);
-  //     // }
-  //     // if (data?.success) {
-  //     //   toast.success(data?.success, {
-  //     //     action: {
-  //     //       label: "Open Gmail",
-  //     //       onClick: () => {
-  //     //         window.open("https://mail.google.com", "_blank");
-  //     //       },
-  //     //     },
-  //     //   });
-  //     // }
-  //   },
-  // });
+  const { execute, status, result } = useAction(scrapeData, {
+    onSuccess: ({ data }) => {
+      form.reset();
+      if (data?.error) {
+        toast.error(data?.error);
+        setIsLoading(false);
+      }
+      if (data?.success) {
+        toast.success(data?.success);
+        setIsLoading(false);
+      }
+    },
+  });
 
   function onSubmit(values: z.infer<typeof TitleInputSchema>) {
     setIsLoading(true);
     const { amazonProductLink } = values;
     execute({ amazonProductLink });
-    // Note: You'll need to set isLoading to false in the onSuccess callback of useAction
   }
 
   return (
