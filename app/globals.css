@@ -242,7 +242,7 @@ body {
 @layer utilities {
   /* PRICE INFO */
   .price-info-card {
-    @apply flex-1 min-w-[200px] flex flex-col gap-2 rounded-lg bg-white border-2 border-black/20 px-5 py-4 shadow-sm hover:shadow-md transition-shadow duration-300;
+    @apply flex-1 min-w-[200px] flex flex-col gap-2 rounded-lg bg-white border-2 border-black/20 px-5 py-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1;
   }
   .section-text {
     @apply text-black text-[32px] font-semibold;

@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -15,9 +16,10 @@ interface Props {
 }
 
 const Modal = ({ productId }: Props) => {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
-      <Button asChild>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Button asChild className="cursor-pointer">
         <DialogTrigger>Track Product</DialogTrigger>
       </Button>
 
@@ -29,7 +31,7 @@ const Modal = ({ productId }: Props) => {
           <DialogDescription>
             Never miss a bargain again with our timely alerts!
           </DialogDescription>
-          <InputEmailForm />
+          <InputEmailForm productId={productId} setOpen={setOpen} />
         </DialogHeader>
       </DialogContent>
     </Dialog>

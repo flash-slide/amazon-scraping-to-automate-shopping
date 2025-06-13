@@ -181,7 +181,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
           </div>
         </div>
 
-        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
+        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px] bg-black text-white rounded-full hover:bg-black/80 transition-colors duration-300 py-4 px-6 cursor-pointer">
           <Image
             src="/assets/icons/bag.svg"
             alt="check"
