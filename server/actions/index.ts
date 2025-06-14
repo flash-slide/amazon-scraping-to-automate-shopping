@@ -126,3 +126,21 @@ export const addUserEmailToProduct = actionClient
       return { error: "Failed to add email" };
     }
   });
+
+export async function deleteProduct(productId: string) {
+  try {
+    connectToDB();
+
+    const deletedProduct = await Product.findByIdAndDelete(productId, {
+      new: true,
+    });
+
+    if (!deletedProduct) return { error: "Product not found" };
+    revalidatePath("/");
+
+    return { success: "Product deleted successfully" };
+  } catch (error) {
+    console.log(error);
+    return { error: "Failed to delete product" };
+  }
+}

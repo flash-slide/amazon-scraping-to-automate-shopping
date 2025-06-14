@@ -2,13 +2,18 @@ import Modal from "@/components/products/modal";
 import PriceInfoCard from "@/components/products/price-info-card";
 import ProductCard from "@/components/products/product-card";
 import { formatNumber } from "@/lib/utils";
-import { getProductById, getSimilarProducts } from "@/server/actions";
+import {
+  deleteProduct,
+  getProductById,
+  getSimilarProducts,
+} from "@/server/actions";
 import { Product } from "@/types";
 import { SeparatorVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import DelSingleProduct from "@/components/products/del-single-product";
 
 type Props = {
   params: { id: string };
@@ -70,7 +75,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                 </p>
               </div>
 
-              <div className="p-2 bg-white-200 rounded-10">
+              <div className="p-2 bg-white-200 rounded-10 cursor-pointer">
                 <Image
                   src="/assets/icons/bookmark.svg"
                   alt="bookmark"
@@ -79,7 +84,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                 />
               </div>
 
-              <div className="p-2 bg-white-200 rounded-10">
+              <div className="p-2 bg-white-200 rounded-10 cursor-pointer">
                 <Image
                   src="/assets/icons/share.svg"
                   alt="share"
@@ -87,6 +92,8 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                   height={20}
                 />
               </div>
+
+              <DelSingleProduct productId={id} />
             </div>
           </div>
 
@@ -207,7 +214,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
         <div className="py-14 flex flex-col gap-2 w-full">
           <p className="section-text">Similar Products</p>
 
-          <div className="flex flex-wrap gap-10 mt-7 w-full">
+          <div className="flex flex-wrap gap-10 mt-7 w-full md:justify-start justify-center">
             {similarProducts.map((product: Product) => (
               <ProductCard key={product._id} product={product} />
             ))}
