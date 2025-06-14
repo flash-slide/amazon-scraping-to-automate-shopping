@@ -8,6 +8,7 @@ import { SeparatorVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   params: { id: string };
@@ -181,18 +182,25 @@ const ProductDetails = async ({ params: { id } }: Props) => {
           </div>
         </div>
 
-        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px] bg-black text-white rounded-full hover:bg-black/80 transition-colors duration-300 py-4 px-6 cursor-pointer">
-          <Image
-            src="/assets/icons/bag.svg"
-            alt="check"
-            width={22}
-            height={22}
-          />
-
-          <Link href="/" className="text-base text-white">
-            Buy Now
+        <Button
+          className="w-fit mx-auto flex items-center justify-center gap-3 min-w-[150px] bg-black text-white rounded-full hover:bg-black/80 transition-colors duration-400 py-6 px-2 cursor-pointer"
+          asChild
+        >
+          <Link
+            href={product.url}
+            className="flex items-center gap-3"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/assets/icons/bag.svg"
+              alt="check"
+              width={22}
+              height={22}
+            />
+            <span className="text-base text-white">Buy Now</span>
           </Link>
-        </button>
+        </Button>
       </div>
 
       {similarProducts && similarProducts?.length > 0 && (
