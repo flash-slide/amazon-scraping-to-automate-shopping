@@ -11,11 +11,14 @@ import { redirect } from "next/navigation";
 import DelSingleProduct from "@/components/products/del-single-product";
 import BuyNowButton from "@/components/products/buy-now-button";
 
-type Props = {
-  params: { id: string };
+type SingleProductProps = {
+  params: {
+    id: string;
+  };
 };
 
-const ProductDetails = async ({ params: { id } }: Props) => {
+const ProductDetails = async ({ params }: SingleProductProps) => {
+  const { id } = params;
   const product: Product = await getProductById(id);
 
   if (!product) redirect("/");
