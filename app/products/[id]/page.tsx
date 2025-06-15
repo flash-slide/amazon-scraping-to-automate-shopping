@@ -2,18 +2,14 @@ import Modal from "@/components/products/modal";
 import PriceInfoCard from "@/components/products/price-info-card";
 import ProductCard from "@/components/products/product-card";
 import { formatNumber } from "@/lib/utils";
-import {
-  deleteProduct,
-  getProductById,
-  getSimilarProducts,
-} from "@/server/actions";
+import { getProductById, getSimilarProducts } from "@/server/actions";
 import { Product } from "@/types";
 import { SeparatorVertical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import DelSingleProduct from "@/components/products/del-single-product";
+import BuyNowButton from "@/components/products/buy-now-button";
 
 type Props = {
   params: { id: string };
@@ -189,25 +185,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
           </div>
         </div>
 
-        <Button
-          className="w-fit mx-auto flex items-center justify-center gap-3 min-w-[150px] bg-black text-white rounded-full hover:bg-black/80 transition-colors duration-400 py-6 px-2 cursor-pointer"
-          asChild
-        >
-          <Link
-            href={product.url}
-            className="flex items-center gap-3"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              src="/assets/icons/bag.svg"
-              alt="check"
-              width={22}
-              height={22}
-            />
-            <span className="text-base text-white">Buy Now</span>
-          </Link>
-        </Button>
+        <BuyNowButton productUrl={product.url} />
       </div>
 
       {similarProducts && similarProducts?.length > 0 && (
