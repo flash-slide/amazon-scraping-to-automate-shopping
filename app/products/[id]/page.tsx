@@ -18,7 +18,7 @@ type SingleProductProps = {
 };
 
 const ProductDetails = async ({ params }: SingleProductProps) => {
-  const { id } = params;
+  const { id } = await params;
   const productId = id.toString();
   const product: Product = await getProductById(productId);
 
