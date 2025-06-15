@@ -11,13 +11,11 @@ import { redirect } from "next/navigation";
 import DelSingleProduct from "@/components/products/del-single-product";
 import BuyNowButton from "@/components/products/buy-now-button";
 
-type SingleProductProps = {
-  params: {
-    id: string;
-  };
-};
-
-const ProductDetails = async ({ params }: SingleProductProps) => {
+const ProductDetails = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
   // asynchronous access of `params.id`.
   const { id } = await params;
   const product: Product = await getProductById(id);
