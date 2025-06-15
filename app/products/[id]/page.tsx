@@ -13,18 +13,18 @@ import BuyNowButton from "@/components/products/buy-now-button";
 
 type SingleProductProps = {
   params: {
-    id: number;
+    id: string;
   };
 };
 
 const ProductDetails = async ({ params }: SingleProductProps) => {
+  // asynchronous access of `params.id`.
   const { id } = await params;
-  const productId = id.toString();
-  const product: Product = await getProductById(productId);
+  const product: Product = await getProductById(id);
 
   if (!product) redirect("/");
 
-  const similarProducts = await getSimilarProducts(productId);
+  const similarProducts = await getSimilarProducts(id);
 
   return (
     <div className="product-container">
@@ -93,7 +93,7 @@ const ProductDetails = async ({ params }: SingleProductProps) => {
                 />
               </div>
 
-              <DelSingleProduct productId={productId} />
+              <DelSingleProduct productId={id} />
             </div>
           </div>
 
@@ -174,7 +174,7 @@ const ProductDetails = async ({ params }: SingleProductProps) => {
             </div>
           </div>
 
-          <Modal productId={productId} />
+          <Modal productId={id} />
         </div>
       </div>
 
