@@ -11,7 +11,7 @@ import { generateEmailBody, sendEmail } from "@/lib/nodemailer";
 import { connectToDB } from "@/server/mongoose";
 import Product from "@/server/models/product.model";
 
-export const maxDuration = 300; // This function can run for a maximum of 300 seconds
+export const maxDuration = 60; // Maximum duration for Hobby plan
 export const dynamic = "force-dynamic"; // Ensures the route is always dynamic
 export const revalidate = 0; // Ensures the route is always revalidated
 
@@ -91,3 +91,14 @@ export async function GET(request: Request) {
     throw new Error(`Failed to get all products: ${error.message}`);
   }
 }
+
+// maxDuration calculation
+
+// If you have 10 products and each product takes 7 seconds to process:
+// - Scraping: 2 seconds
+// - Database update: 3 seconds
+// - Email sending: 2 seconds
+// Total time = 10 products × 7 seconds = 70 seconds ❌ (This would timeout)
+
+// If you have 5 products and each takes 7 seconds:
+// Total time = 5 products × 7 seconds = 35 seconds ✅ (This would complete successfully)
