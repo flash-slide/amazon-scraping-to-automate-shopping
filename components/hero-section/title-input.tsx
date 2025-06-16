@@ -7,7 +7,7 @@ const TitleInput = () => {
     <div className="flex flex-col justify-center items-center gap-3 mt-20 bg-background-black">
       <SplitText
         text="Let's automate shopping!"
-        className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-center pb-5"
+        className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-center pb-5"
         delay={100}
         duration={0.4}
         ease="power3.out"

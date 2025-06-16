@@ -54,18 +54,21 @@ const ScrapeLinkForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex flex-col max-w-full items-center gap-2">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-full max-w-3xl mx-auto px-6"
+      >
+        <div className="flex flex-col w-full items-center gap-2">
           <FormField
             control={form.control}
             name="amazonProductLink"
             render={({ field }) => (
-              <FormItem className="flex-1">
+              <FormItem className="w-full">
                 <FormLabel>Amazon Product Link</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter Amazon product link"
-                    className="w-[600px]"
+                    className="w-full"
                     {...field}
                   />
                 </FormControl>
