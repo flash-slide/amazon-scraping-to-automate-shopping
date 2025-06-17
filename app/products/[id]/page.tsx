@@ -10,6 +10,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import DelSingleProduct from "@/components/products/del-single-product";
 import BuyNowButton from "@/components/products/buy-now-button";
+import DescriptionSection from "@/components/products/product-description";
 
 const ProductDetails = async ({
   params,
@@ -177,16 +178,7 @@ const ProductDetails = async ({
       </div>
 
       <div className="flex flex-col gap-16">
-        <div className="flex flex-col gap-5">
-          <h3 className="text-2xl text-black font-semibold">
-            Product Description
-          </h3>
-
-          <div className="flex flex-col gap-4">
-            {product?.description?.split("\n")}
-          </div>
-        </div>
-
+        <DescriptionSection description={product.description} />
         <BuyNowButton productUrl={product.url} />
       </div>
 
