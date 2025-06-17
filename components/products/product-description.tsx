@@ -46,7 +46,7 @@ const DescriptionSection = ({ description }: { description: string }) => {
         </h3>
         <Button
           onClick={handleSimplify}
-          className="w-fit cursor-pointer"
+          className="w-fit cursor-pointer rounded-full"
           disabled={isLoading}
         >
           {isLoading ? "Simplifying..." : "Simplify the description with AI"}
